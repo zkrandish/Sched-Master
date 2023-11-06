@@ -1,0 +1,96 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    background: url('../images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-container {
+    background-color: rgba(211, 211, 211, 0.4);
+    padding: 30px;
+    border-radius: 10px;
+    width: 320px;
+    text-align: center;
+}
+
+.logo {
+    margin-bottom: 20px;
+}
+
+.login-container h1 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.button-group {
+    margin: 20px 0;
+}
+
+.button {
+    padding: 10px 20px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 20px;
+    margin: 0 5px;
+}
+
+.selected {
+    background-color: #ff6200;
+    color: #fff;
+}
+
+.notSelected {
+    background-color: #fff;
+    color: #ff6200;
+    border: 2px solid #ff6200;
+}
+
+.input-group {
+    margin: 10px 0;
+}
+
+.input-field {
+    width: 90%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.error-message {
+    color: red;
+    padding: 5px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.validation-summary ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.submit-button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    font-weight: bold;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.footer-links {
+    margin-top: 20px;
+}
+
+    .footer-links a {
+        text-decoration: none;
+        color: #007bff;
+    }

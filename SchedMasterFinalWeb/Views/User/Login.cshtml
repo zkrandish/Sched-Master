@@ -1,0 +1,50 @@
+﻿@model SchedMasterFinalWeb.Models.Login
+
+@{
+    ViewBag.Title = "Login";
+    ViewBag.CssFile = "";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/LoginStyles/UserLogin.css">
+
+<div class="form-container">
+    <div class="logo">
+        <img src="~/Content/images/AppLogo.png" alt="Logo">
+    </div>
+
+    <h1>SchedMaster</h1>
+    <p>LaSalle College - Montréal</p>
+
+    <div class="button-group">
+        <button id="btnStudent" class="button selected">Students</button>
+        <button id="btnEmployee" class="button notSelected">Employees</button>
+    </div>
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "login-form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" id="userType" name="UserType" value="Student" />
+
+        <div class="input-group">
+            @Html.LabelFor(model => model.UserId)
+            @Html.TextBoxFor(model => model.UserId, new { @class = "input-field", @placeholder = "Student number" })
+            @Html.ValidationMessageFor(model => model.UserId, null, new { @class = "error-message" })
+        </div>
+
+        <div class="input-group">
+            @Html.LabelFor(model => model.Password)
+            @Html.PasswordFor(model => model.Password, new { @class = "input-field", @placeholder = "Password" })
+            @Html.ValidationMessageFor(model => model.Password, null, new { @class = "error-message" })
+            @Html.ValidationSummary(true, "", new { @class = "error-message validation-summary" })
+        </div>
+
+        <button type="submit" class="submit-button">Log In</button>
+    }
+
+    <div class="footer-links">
+        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+    </div>
+</div>
+<script src="~/Scripts/loginForm.js"></script>
+

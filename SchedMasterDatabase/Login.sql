@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[Login] (
+    [UserId] INT NOT NULL PRIMARY KEY,
+    [Password] NVARCHAR(50) NOT NULL,
+
+    CONSTRAINT FK_Login_UserId FOREIGN KEY ([UserId]) REFERENCES [User] ([UserId]) ON DELETE CASCADE
+);
+

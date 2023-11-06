@@ -1,0 +1,100 @@
+﻿body {
+    background-color: #FFEECC;
+}
+
+.centered-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(211, 211, 211, 0.4);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .table th,
+    .table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    .table th {
+        background-color: #ff9900;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        color: white;
+    }
+
+    .table tr:hover {
+        background-color: #f5f5f5;
+    }
+
+.search-bar {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+    .search-bar input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .search-bar button {
+        padding: 10px 15px;
+        border: none;
+        background-color: #ff9900;
+        color: #ffffff;
+        cursor: pointer;
+    }
+
+        .search-bar button:hover {
+            background-color: #e68a00; /* Slightly darker orange */
+        }
+
+.action-button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff9900;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    display: block;
+}
+
+.delete-button {
+    background-color: #d9534f;
+}
+
+.action-button:hover {
+    background-color: #e68a00; /* Slightly darker orange on hover */
+}
+
+
+.delete-button:hover {
+    background-color: #c9302c; /* Darker red on hover */
+}
+
+
+.btn-create {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #ff9900;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-create:hover {
+        background-color: #e68a00;
+    }

@@ -1,0 +1,17 @@
+﻿.admin-welcome {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #FFEECC; /* A light shade of orange for background */
+    margin: 0;
+}
+
+.centered-container {
+    background-color: rgba(211, 211, 211, 0.4);
+    padding: 100px;
+    border-radius: 15px;
+    width: 90%; /* Taking 80% of screen width, you can adjust this value */
+    max-width: 800px; /* Maximum width is 600px, adjust if needed */
+    text-align: center;
+}
