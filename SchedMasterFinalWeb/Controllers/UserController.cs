@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.UI.WebControls;
+using SchedMasterFinalWeb.ViewModels;
+
 
 
 namespace SchedMasterFinalWeb.Controllers
@@ -42,9 +44,19 @@ namespace SchedMasterFinalWeb.Controllers
 
                     if (user.Role == "Admin")
                     {
+                        const string defaultPassword = "welcome123";
+                        if (model.Password.Trim().Equals(defaultPassword))
+                        {
+                            return RedirectToAction("ChangePassword", "User", new { id = user.UserId });
+                        }
                         return RedirectToAction("Index", "Admin");  // Redirect to home page or dashboard.
                     }else if (user.Role == "Teacher")
                     {
+                        const string defaultPassword = "welcome123";
+                        if (model.Password.Trim().Equals(defaultPassword))
+                        {
+                            return RedirectToAction("ChangePassword", "User", new { id = user.UserId });
+                        }
                         return RedirectToAction("Index", "Teacher");
                     }
                     else if (user.Role == "Student")
@@ -59,5 +71,59 @@ namespace SchedMasterFinalWeb.Controllers
             }
             return View(model);
         }
+        // GET: User/ChangePassword
+        public ActionResult ChangePassword(int id)
+        {
+           
+            var user = db.Logins.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+        
+            // This is security best practice to prevent one user from trying to change another user's password.
+            if (User.Identity.IsAuthenticated && User.Identity.Name == user.UserId.ToString())
+            {
+               
+                var viewModel = new ChangePasswordViewModel();
+                return View(viewModel); // This will present the ChangePassword.cshtml view to the user.
+            }
+
+         
+            return View();
+        }
+
+        // POST: User/ChangePassword
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword(int id, ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                var user = db.Logins.Find(id);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+
+                
+                if (!user.Password.Equals(model.OldPassword)) 
+                {
+                    ModelState.AddModelError("", "The current password is incorrect.");
+                    return View(model);
+                }
+
+                user.Password = model.NewPassword;
+                db.SaveChanges();
+
+               
+                return RedirectToAction("Login", "User");
+            }
+
+            // If we got this far, something failed, redisplay form.
+            return View(model);
+        }
+
     }
 }

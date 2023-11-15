@@ -1,0 +1,26 @@
+﻿** Highlights
+     Tables that will be recreated with data migrated
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[ClassSessions] (Table)
+       [dbo].[Course] (Table)
+       [dbo].[Enrollment] (Table)
+       [dbo].[Group] (Table)
+       [dbo].[Login] (Table)
+       [dbo].[User] (Table)
+       [dbo].[FK_ClassSession_GroupId] (Foreign Key)
+       [dbo].[FK_Enrollment_UserId] (Foreign Key)
+       [dbo].[FK_Enrollment_GroupId] (Foreign Key)
+       [dbo].[FK_Program_CourseCode] (Foreign Key)
+       [dbo].[FK_UserId] (Foreign Key)
+       [dbo].[FK_Login_UserId] (Foreign Key)
+
+** Supporting actions
