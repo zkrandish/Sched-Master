@@ -56,8 +56,26 @@ namespace SchedMasterFinalWeb.Controllers
             return View("Teachers", "~/Views/Shared/_AdminLayout.cshtml", TeacherUsers);
         }
 
-       
+
+        public ActionResult Courses()
+        {
+
+            // this if to display the update message when the user is updated
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Message = TempData["Message"].ToString();
+                TempData["Message"] = null;
+            }
+            else
+            {
+                ViewBag.Message = null;
+            }
+           var courses = db.Courses.ToList();
+            return View("Courses", "~/Views/Shared/_AdminLayout.cshtml", courses);
+        }
 
        
+    
+
     }
 }

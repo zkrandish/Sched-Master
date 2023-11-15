@@ -1,0 +1,67 @@
+﻿body {
+    background-color: #FFEECC;
+    font-family: 'Arial', sans-serif; /* Added a default font for better readability */
+    margin: 0;
+    padding: 0;
+}
+
+.title {
+    text-align: center;
+}
+
+.courses-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center; /* Center courses horizontally on the page */
+    padding: 20px; /* Added padding for a bit of space from the page edges */
+}
+
+.course {
+    min-width: 240px;
+    background-color: rgba(211, 211, 211, 0.4);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    padding: 20px;
+    transform: scale(0);
+    transition: transform 0.5s;
+    width: calc(20% - 40px); /* This will make the course occupy 25% of the container width minus the padding. Adjust as needed. */
+    text-align: center;
+    margin-bottom: 20px; /* Space between rows if they wrap */
+}
+
+    .course a {
+        display: block;
+        text-decoration: none; /* Removes underline */
+        color: inherit; /* Uses the parent's text color */
+        padding: inherit; /* To ensure the padding from the .course div is applied to the anchor */
+    }
+
+    .course:hover {
+    }
+
+    .course h3 {
+        margin-top: 0;
+        color: black;
+        font-weight: bold;
+    }
+
+.addButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    font-size: 24px;
+    border: none;
+    background-color: rgba(255, 165, 0, 0.6);
+    color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000;
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+    .addButton:hover {
+        background-color: rgba(255, 165, 0, 0.8);
+    }

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<SchedMasterFinalWeb.Models.Course>
+
+@{
+    ViewBag.Title = "Courses";
+}
+
+
+
+<link rel="stylesheet" type="text/css" href="~/Content/AdminStyles/AdminCourse.css">
+
+<h1 class="title">Computer Science Courses</h1>
+
+<div class="courses-container">
+    @foreach (var course in Model)
+    {
+        <div class="course">
+            <a href="@Url.Action("UpdateForm", "AdminCourses", new { courseCode = course.CourseCode })">
+                <h3>@course.CourseName</h3>
+                <p>@course.Description</p>
+            </a>
+        </div>
+    }
+</div>
+
+@Html.ActionLink("+", "AddForm", "AdminCourses", null, new { @class = "addButton" })
+
+
+<script src="~/Scripts/AdminCourses.js"></script>
+
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <script type="text/javascript">
+        alert('@ViewBag.Message');
+    </script>
+
+}
