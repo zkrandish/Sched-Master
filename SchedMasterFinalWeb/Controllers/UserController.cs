@@ -8,8 +8,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.UI.WebControls;
 using SchedMasterFinalWeb.ViewModels;
-
-
+using SchedMasterFinalWeb.Common;
 
 namespace SchedMasterFinalWeb.Controllers
 {
@@ -44,15 +43,10 @@ namespace SchedMasterFinalWeb.Controllers
 
                     if (user.Role == "Admin")
                     {
-                        const string defaultPassword = "welcome123";
-                        if (model.Password.Trim().Equals(defaultPassword))
-                        {
-                            return RedirectToAction("ChangePassword", "User", new { id = user.UserId });
-                        }
                         return RedirectToAction("Index", "Admin");  // Redirect to home page or dashboard.
                     }else if (user.Role == "Teacher")
                     {
-                        const string defaultPassword = "welcome123";
+                        string defaultPassword = LoginUtitilty.GenerateDefaultPassword();
                         if (model.Password.Trim().Equals(defaultPassword))
                         {
                             return RedirectToAction("ChangePassword", "User", new { id = user.UserId });
@@ -61,6 +55,11 @@ namespace SchedMasterFinalWeb.Controllers
                     }
                     else if (user.Role == "Student")
                     {
+                        string defaultPassword = LoginUtitilty.GenerateDefaultPassword();
+                        if (model.Password.Trim().Equals(defaultPassword))
+                        {
+                            return RedirectToAction("ChangePassword", "User", new { id = user.UserId });
+                        }
                         return RedirectToAction("Index", "Student");
                     }
                 }
@@ -76,17 +75,19 @@ namespace SchedMasterFinalWeb.Controllers
         {
            
             var user = db.Logins.Find(id);
-            if (user == null)
+            if (user == null )
             {
                 return HttpNotFound();
             }
-        
+
+          
+
             // This is security best practice to prevent one user from trying to change another user's password.
             if (User.Identity.IsAuthenticated && User.Identity.Name == user.UserId.ToString())
             {
                
-                var viewModel = new ChangePasswordViewModel();
-                return View(viewModel); // This will present the ChangePassword.cshtml view to the user.
+                
+                return View("~/Views/User/ChangePassword.cshtml"); // This will present the ChangePassword.cshtml view to the user.
             }
 
          
@@ -107,12 +108,13 @@ namespace SchedMasterFinalWeb.Controllers
                     return HttpNotFound();
                 }
 
-                
-                if (!user.Password.Equals(model.OldPassword)) 
+                if (model.NewPassword.Equals(LoginUtitilty.GenerateDefaultPassword()))
                 {
-                    ModelState.AddModelError("", "The current password is incorrect.");
-                    return View(model);
+                    ModelState.AddModelError("", "New password cannot be the default password.");
+                    return View();
                 }
+
+
 
                 user.Password = model.NewPassword;
                 db.SaveChanges();

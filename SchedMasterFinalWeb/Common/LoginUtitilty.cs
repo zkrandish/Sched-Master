@@ -9,18 +9,25 @@ namespace SchedMasterFinalWeb.Common
     public class LoginUtitilty
     {
         private static SchedMasterDatabaseEntities db = new SchedMasterDatabaseEntities();
-        public static string GenerateRandomPassword(int length)
+
+        //public static string GenerateDefaultPassword(int length)
+        //{
+
+        //    const string validChars = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*?_-";
+        //    Random random = new Random();
+
+        //    // Select random characters from the validChars string.
+        //    var chars = Enumerable.Repeat(validChars, length)
+        //                          .Select(s => s[random.Next(s.Length)]).ToArray();
+
+        //    // Create a string from the character array and return it as the password.
+        //    return new String(chars);
+        //}
+        public static string GenerateDefaultPassword()
         {
-            const string validChars = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*?_-";
-            Random random = new Random();
-
-            // Select random characters from the validChars string.
-            var chars = Enumerable.Repeat(validChars, length)
-                                  .Select(s => s[random.Next(s.Length)]).ToArray();
-
-            // Create a string from the character array and return it as the password.
-            return new String(chars);
+            return "Welcome123";
         }
+
         public static int GenerateRandomUniqueId()
         {
             Random rnd = new Random();
