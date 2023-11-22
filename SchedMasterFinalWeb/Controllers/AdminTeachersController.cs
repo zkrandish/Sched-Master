@@ -67,7 +67,7 @@ namespace SchedMasterFinalWeb.Controllers
                 Login loginUser = new Login
                 {
                     UserId = user.UserId,
-                    Password = LoginUtitilty.GenerateRandomPassword(8)
+                    Password = LoginUtitilty.GenerateDefaultPassword()
                 };
                 db.Logins.Add(loginUser);
                 db.SaveChanges();

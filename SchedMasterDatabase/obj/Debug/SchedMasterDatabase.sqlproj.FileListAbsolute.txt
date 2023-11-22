@@ -1,6 +1,0 @@
-C:\Users\hajha\source\repos\SchedMasterFinal\SchedMasterDatabase\bin\Debug\SchedMasterDatabase.dacpac
-C:\Users\hajha\source\repos\SchedMasterFinal\SchedMasterDatabase\bin\Debug\SchedMasterDatabase.dll
-C:\Users\hajha\source\repos\SchedMasterFinal\SchedMasterDatabase\bin\Debug\SchedMasterDatabase.pdb
-C:\Users\hajha\source\repos\SchedMasterFinal\SchedMasterDatabase\obj\Debug\SchedMasterDatabase.sqlproj.AssemblyReference.cache
-C:\Users\hajha\source\repos\SchedMasterFinal\SchedMasterDatabase\obj\Debug\SchedMasterDatabase.dll
-C:\Users\hajha\source\repos\SchedMasterFinal\SchedMasterDatabase\obj\Debug\SchedMasterDatabase.pdb
