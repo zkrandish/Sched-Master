@@ -1,0 +1,45 @@
+﻿@model IEnumerable<SchedMasterFinalWeb.Models.Course>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoursPerWeek)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoursPerWeek)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CourseCode }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CourseCode }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CourseCode })
+        </td>
+    </tr>
+}
+
+</table>

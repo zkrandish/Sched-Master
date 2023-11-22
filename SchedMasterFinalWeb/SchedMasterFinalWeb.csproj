@@ -134,6 +134,7 @@
     <Compile Include="Controllers\AdminCoursesController.cs" />
     <Compile Include="Controllers\AdminStudentsController.cs" />
     <Compile Include="Controllers\AdminTeachersController.cs" />
+    <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -245,6 +246,11 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Views\User\ChangePassword.cshtml" />
+    <Content Include="Views\Courses\Create.cshtml" />
+    <Content Include="Views\Courses\Delete.cshtml" />
+    <Content Include="Views\Courses\Details.cshtml" />
+    <Content Include="Views\Courses\Edit.cshtml" />
+    <Content Include="Views\Courses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
