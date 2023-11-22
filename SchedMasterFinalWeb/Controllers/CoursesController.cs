@@ -34,7 +34,7 @@ namespace SchedMasterFinalWeb.Controllers
             }
             return View(course);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Courses/Create
         public ActionResult Create()
         {
@@ -59,6 +59,7 @@ namespace SchedMasterFinalWeb.Controllers
         }
 
         // GET: Courses/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -90,6 +91,7 @@ namespace SchedMasterFinalWeb.Controllers
         }
 
         // GET: Courses/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(string id)
         {
             if (id == null)
