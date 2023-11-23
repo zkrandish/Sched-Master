@@ -23,7 +23,7 @@ namespace SchedMasterFinalWeb.Models
     
         public string GroupId { get; set; }
         public string CourseCode { get; set; }
-        public int UserId { get; set; }
+        public Nullable<int> UserId { get; set; }
         public int Capacity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

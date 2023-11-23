@@ -40,6 +40,7 @@ namespace SchedMasterFinalWeb.Controllers
                 {
                     FormsAuthentication.SetAuthCookie(userLogin.UserId.ToString(), false);
                     User user = db.Users.FirstOrDefault(x => x.UserId == model.UserId);
+                    Session["UserId"] = user.UserId;
 
                     if (user.Role == "Admin")
                     {

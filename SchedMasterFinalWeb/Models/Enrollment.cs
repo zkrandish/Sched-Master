@@ -16,7 +16,7 @@ namespace SchedMasterFinalWeb.Models
     {
         public int UserId { get; set; }
         public string GroupId { get; set; }
-        public double Grade { get; set; }
+        public Nullable<double> Grade { get; set; }
     
         public virtual Group Group { get; set; }
         public virtual User User { get; set; }

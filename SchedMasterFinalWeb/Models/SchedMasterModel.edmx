@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SchedMasterDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SchedMasterDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ClassSessions">
           <Key>
             <PropertyRef Name="ClassSessionId" />
@@ -31,7 +31,7 @@
           </Key>
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="GroupId" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Grade" Type="float" Nullable="false" />
+          <Property Name="Grade" Type="float" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -39,7 +39,7 @@
           </Key>
           <Property Name="GroupId" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CourseCode" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" />
           <Property Name="Capacity" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Login">
@@ -130,7 +130,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserId">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Group" Type="Self.Group" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -173,8 +173,7 @@
             <End Role="Group" EntitySet="Group" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SchedMasterDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -206,7 +205,7 @@
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="GroupId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Grade" Type="Double" Nullable="false" />
+          <Property Name="Grade" Type="Double" />
           <NavigationProperty Name="Group" Relationship="Self.FK_Enrollment_GroupId" FromRole="Enrollment" ToRole="Group" />
           <NavigationProperty Name="User" Relationship="Self.FK_Enrollment_UserId" FromRole="Enrollment" ToRole="User" />
         </EntityType>
@@ -216,7 +215,7 @@
           </Key>
           <Property Name="GroupId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CourseCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
           <Property Name="Capacity" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ClassSessions" Relationship="Self.FK_ClassSession_GroupId" FromRole="Group" ToRole="ClassSessions" />
           <NavigationProperty Name="Course" Relationship="Self.FK_Program_CourseCode" FromRole="Group" ToRole="Course" />
@@ -301,7 +300,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserId">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Group" Type="Self.Group" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">

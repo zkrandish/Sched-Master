@@ -1,0 +1,17 @@
+﻿@model SchedMasterFinalWeb.Models.Enrollment
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.Label("Group")
+        @Html.DropDownList("GroupId", (SelectList)ViewBag.GroupId, "Select a Group", new { @class = "form-control" })
+        @Html.ValidationMessage("GroupId")
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Enroll" class="btn btn-primary" />
+    </div>
+}
+

@@ -25,8 +25,6 @@ namespace SchedMasterFinalWeb.Models
         public string Role { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
-        [System.ComponentModel.DataAnnotations.DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public System.DateTime DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
         public string EmailAddress { get; set; }
