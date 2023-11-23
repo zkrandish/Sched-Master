@@ -1,0 +1,29 @@
+﻿@model IEnumerable<SchedMasterFinalWeb.Models.Enrollment>
+
+<h2>My Enrollments</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Course Name</th>
+            <th>Group ID</th>
+            <th>Enrollment Details</th>
+            <th>Grage</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var enrollment in Model)
+        {
+            <tr>
+                <td>@enrollment.Group.Course.CourseName</td>
+                <td>@enrollment.GroupId</td>
+                <td>@enrollment.Group.Course.Description</td>
+                <td>@enrollment.Grade</td>
+
+                <td>
+                    @* Add any additional details you want to show *@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

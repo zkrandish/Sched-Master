@@ -260,6 +260,7 @@
     <Content Include="Views\Enrollments\Edit.cshtml" />
     <Content Include="Views\Enrollments\Index.cshtml" />
     <Content Include="Views\StudentDashboard\Enroll.cshtml" />
+    <Content Include="Views\StudentDashboard\MyEnrollments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

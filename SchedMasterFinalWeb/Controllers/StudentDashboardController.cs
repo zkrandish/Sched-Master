@@ -1,6 +1,7 @@
 ﻿using SchedMasterFinalWeb.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -78,6 +79,28 @@ namespace SchedMasterFinalWeb.Controllers
             ViewBag.GroupId = new SelectList(db.Groups, "GroupId", "GroupId", enrollment.GroupId);
             return View(enrollment);
         }
+        public ActionResult MyEnrollments()
+        {
+            if (Session["UserId"] != null)
+            {
+                int userId = (int)Session["UserId"];
+
+               
+                var enrollments = db.Enrollments
+                    .Where(e => e.UserId == userId)
+                    .Include(e => e.Group)
+                    .Include(e => e.Group.Course)
+                    
+                    .ToList();
+
+                return View(enrollments);
+            }
+            else
+            {
+                return RedirectToAction("Index", "StudentDashboard");
+            }
+        }
+
 
 
     }
