@@ -30,7 +30,7 @@ namespace SchedMasterFinalWeb.Controllers
             }
             // Get all groups where UserId is null
             var groupsWithNoUser = db.Groups.Where(g => g.UserId == null).ToList();
-            return View("Index", "~/Views/Shared/_StudentLayout.cshtml", groupsWithNoUser);
+            return View("TeacherIndex", "~/Views/Shared/_TeacherLayout.cshtml", groupsWithNoUser);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<SchedMasterFinalWeb.Models.Group>
+﻿
+@model IEnumerable<SchedMasterFinalWeb.Models.Group>
 @{
     ViewBag.Title = "Index";
 }
@@ -15,16 +16,8 @@
                 <h3>@group.Course.CourseName</h3>
                 <p>@group.GroupId</p>
                 <p>@group.Course.Description</p>
-                @if (group.User != null)
-                {
-                    <p>@group.User.FirstName @group.User.LastName</p>
-                }
-                else
-                {
-                    <p>No teacher assigned yet</p>
-                }
                 <p>Hours per week: @group.Course.HoursPerWeek</p>
-                @Html.ActionLink("Enroll", "Enroll", "StudentDashboard", new { groupId = group.GroupId }, new { @class = "btn btn-enroll" })
+                @Html.ActionLink("Add Group", "AssignGroup", "TeacherDashboard", new { groupId = group.GroupId }, new { @class = "btn btn-enroll" })
             </a>
         </div>
     }

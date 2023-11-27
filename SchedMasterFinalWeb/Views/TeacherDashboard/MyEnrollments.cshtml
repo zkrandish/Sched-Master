@@ -1,5 +1,5 @@
 ﻿@using SchedMasterFinalWeb.Models
-@model Tuple<List<Enrollment>, List<ClassSession>>
+@model Tuple<List<Group>, List<ClassSession>>
 
 
 <link rel="stylesheet" type="text/css" href="~/Content/UserSchedule.css">
@@ -35,18 +35,11 @@
                         if (session.StartTime.Hours == hour)
                         {
                             <td rowspan="@durationInSlots" class="class-session-container">
-                                @session.Group.Course.CourseName
+                                <p>@session.Group.Course.CourseName </p>
                                 <p>@session.GroupId</p>
-                                @if (session.Group.User != null)
-                                {
-                                    <p>@session.Group.User.FirstName @session.Group.User.LastName</p>
-                                }
-                                else
-                                {
-                                    <p>No teacher assigned yet</p>
-                                }
+                                <p>@session.Group.User.FirstName @session.Group.User.LastName</p>
                                 @session.StartTime.ToString("hh\\:mm") - @session.EndTime.ToString("hh\\:mm")
-                                @Html.ActionLink("Disenroll", "Disenroll", "StudentDashboard", new { userId = session.GroupId, groupId = session.GroupId }, new { @class = "btn btn-disenroll" })
+                                @Html.ActionLink("Remove", "UnassignGroup", "TeacherDashboard", new { groupId = session.GroupId }, new { @class = "btn btn-enroll" })
                             </td>
                         }
                     }
@@ -60,8 +53,6 @@
         }
     </tbody>
 </table>
-
-
 
 
 @if (!string.IsNullOrEmpty(ViewBag.Message))

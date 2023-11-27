@@ -125,10 +125,14 @@ namespace SchedMasterFinalWeb.Controllers
                     }
                 }
             }
-            return RedirectToAction("Index", "Groups");
+            return RedirectToAction("MyEnrollments");
         }
         public ActionResult MyEnrollments()
         {
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Message = TempData["Message"].ToString();
+            }
             if (Session["UserId"] != null)
             {
                 int userId = (int)Session["UserId"];
