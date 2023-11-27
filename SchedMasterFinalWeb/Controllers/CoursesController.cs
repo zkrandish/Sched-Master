@@ -17,7 +17,7 @@ namespace SchedMasterFinalWeb.Controllers
         // GET: Courses
         public ActionResult Index()
         {
-            return View(db.Courses.ToList());
+            return View("Index","~/Views/Shared/_StudentLayout.cshtml", db.Courses.ToList());
         }
 
         // GET: Courses/Details/5

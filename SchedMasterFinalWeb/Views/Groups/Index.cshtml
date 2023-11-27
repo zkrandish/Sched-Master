@@ -1,0 +1,44 @@
+﻿@model IEnumerable<SchedMasterFinalWeb.Models.Group>
+@{
+    ViewBag.Title = "Index";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/AdminStyles/AdminCourse.css">
+
+<h1 class="title">Computer Science Courses</h1>
+
+<div class="courses-container">
+    @foreach (var group in Model)
+    {
+        <div class="course">
+            <a href="">
+                <h3>@group.Course.CourseName</h3>
+                <p>@group.GroupId</p>
+                <p>@group.Course.Description</p>
+                @if (group.User != null)
+                {
+                    <p>@group.User.FirstName @group.User.LastName</p>
+                }
+                else
+                {
+                    <p>No teacher assigned yet</p>
+                }
+                <p>Hours per week: @group.Course.HoursPerWeek</p>
+                @Html.ActionLink("Disenroll", "Disenroll", "StudentDashboard", new { userId = group.UserId, groupId = group.GroupId }, new { @class = "btn btn-disenroll" })
+                @Html.ActionLink("Enroll", "Enroll", "StudentDashboard", new { groupId = group.GroupId }, new { @class = "btn btn-enroll" })
+            </a>
+        </div>
+    }
+
+</div>
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <script type="text/javascript">
+        window.onload = function() {
+            var message = '@Html.Raw(HttpUtility.JavaScriptStringEncode(ViewBag.Message))';
+            alert(message);
+        };
+    </script>
+}
+<script src="~/Scripts/AdminCourses.js"></script>

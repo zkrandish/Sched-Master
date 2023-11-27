@@ -1,0 +1,32 @@
+﻿.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Fixed layout for equal column widths */
+}
+
+.schedule-table th {
+    background-color: #ff9900;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+.schedule-table td {
+    border: 1px solid #ddd;
+    height: 60px; /* Base height for one hour slot */
+    padding: 5px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.class-session-container {
+    background-color: rgba(211, 211, 211, 0.4);
+    font-weight: bold;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: -1px; /* Aligns the border with the td border */
+    height: 100%; /* Take full height of the td */
+   
+}
+
+

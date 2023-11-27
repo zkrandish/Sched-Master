@@ -1,28 +1,60 @@
-﻿@model IEnumerable<SchedMasterFinalWeb.Models.Enrollment>
+﻿@using SchedMasterFinalWeb.Models
+@model Tuple<List<Enrollment>, List<ClassSession>>
 
-<h2>My Enrollments</h2>
 
-<table class="table">
+<link rel="stylesheet" type="text/css" href="~/Content/UserSchedule.css">
+
+<table class="schedule-table">
     <thead>
         <tr>
-            <th>Course Name</th>
-            <th>Group ID</th>
-            <th>Enrollment Details</th>
-            <th>Grage</th>
+            <th></th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var enrollment in Model)
+        @for (int hour = 8; hour <= 23; hour++)
         {
-            <tr>
-                <td>@enrollment.Group.Course.CourseName</td>
-                <td>@enrollment.GroupId</td>
-                <td>@enrollment.Group.Course.Description</td>
-                <td>@enrollment.Grade</td>
 
-                <td>
-                    @* Add any additional details you want to show *@
-                </td>
+            <tr>
+                
+                <td>@hour:00</td>
+                @foreach (var day in new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" })
+                {
+                    // Check if there is a session for this hour and day
+                    var sessions = Model.Item2.Where(s => s.StartTime.Hours <= hour && s.EndTime.Hours > hour && s.Day == day).ToList();
+
+                    if (sessions.Any())
+                    {
+                        var session = sessions.First();
+                        int durationInSlots = (int)(session.EndTime - session.StartTime).TotalHours;
+                        // Only create the cell if the hour matches the session start time
+                        if (session.StartTime.Hours == hour)
+                        {
+                            <td rowspan="@durationInSlots" class="class-session-container">
+                                @session.Group.Course.CourseName <br />
+                                @session.GroupId
+                                @if (session.Group.User != null)
+                                {
+                                    @session.Group.User.FirstName @session.Group.User.LastName
+                                }
+                                else
+                                {
+                                    <p>No teacher assigned yet</p>
+                                }
+                                @session.StartTime.ToString("hh\\:mm") - @session.EndTime.ToString("hh\\:mm")
+                            </td>
+                        }
+                    }
+                    else
+                    {
+                        // If no session is scheduled for this time slot, create an empty cell
+                        <td></td>
+                    }
+                }
             </tr>
         }
     </tbody>

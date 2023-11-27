@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Admin Dashboard";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Admin Dashboard</title>
+    <link rel="stylesheet" href="~/Content/AdminStyles/AdminLayout.css">
+    <script src="~/Scripts/scripts.js" defer></script>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div>
+                <a href="@Url.Action("Index", "StudentDashboard")" class="logoLink" style="text-decoration: none;">
+                    <img src="~/Content/images/AppLogo.png" alt="Logo">
+                    <h2>SchedMaster</h2>
+                </a>
+            </div>
+            <div class="menu">
+                @Html.ActionLink("View All Available Courses", "ViewAllAvailableCourses", "StudentDashboard")
+                @Html.ActionLink("My Schedule", "MyEnrollments", "StudentDashboard")
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="main-content">
+            @RenderBody()
+        </div>
+    </div>
+
+</body>
+</html>

@@ -136,6 +136,7 @@
     <Compile Include="Controllers\AdminTeachersController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\EnrollmentsController.cs" />
+    <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginsController.cs" />
     <Compile Include="Controllers\StudentDashboardController.cs" />
@@ -186,6 +187,7 @@
     <Content Include="Content\AdminStyles\AdminLayout.css" />
     <Content Include="Content\AdminStyles\AdminUser.css" />
     <Content Include="Content\LoginStyles\UserLogin.css" />
+    <Content Include="Content\UserSchedule.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Models\SchedMasterModel.Context.tt">
@@ -261,6 +263,8 @@
     <Content Include="Views\Enrollments\Index.cshtml" />
     <Content Include="Views\StudentDashboard\Enroll.cshtml" />
     <Content Include="Views\StudentDashboard\MyEnrollments.cshtml" />
+    <Content Include="Views\Shared\_StudentLayout.cshtml" />
+    <Content Include="Views\Groups\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

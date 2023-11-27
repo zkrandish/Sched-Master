@@ -59,7 +59,7 @@ namespace SchedMasterFinalWeb.Controllers
         {
             try
             {
-                user.UserId = LoginUtitilty.GenerateRandomUniqueId();
+                user.UserId = LoginUtitilty.GenerateUniqueId();
                 user.Role = "Teacher";
 
                 db.Users.Add(user);

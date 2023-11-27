@@ -28,17 +28,13 @@ namespace SchedMasterFinalWeb.Common
             return "Welcome123";
         }
 
-        public static int GenerateRandomUniqueId()
+        public static int GenerateUniqueId()
         {
-            Random rnd = new Random();
-            int uniqueId;
-            do
-            {
-                uniqueId = rnd.Next(1000000, 10000000); // Generates a number between 1000000 and 9999999
-            }
-            while (db.Users.Any(u => u.UserId == uniqueId)); // This checks the generated ID against the database
+            // Get the maximum UserId in the database, or default to 1111 if there are no users yet
+            int maxUserId = db.Users.Max(u => (int?)u.UserId) ?? 1111;
 
-            return uniqueId;
+            // Return one more than the maximum UserId
+            return maxUserId + 1;
         }
     }
 }

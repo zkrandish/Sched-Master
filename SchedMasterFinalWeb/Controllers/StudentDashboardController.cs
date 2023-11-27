@@ -17,42 +17,46 @@ namespace SchedMasterFinalWeb.Controllers
         // GET: StudentDashboard
         public ActionResult Index()
         {
-            return View();
+
+            return View("Index", "~/Views/Shared/_StudentLayout.cshtml");
         }
         public ActionResult ViewAllAvailableCourses()
         {
-            return RedirectToAction("Index", "Courses");
+            return RedirectToAction("Index", "Groups");
         }
-        public ActionResult Enroll(string courseId)
+        //public ActionResult Enroll(string courseId)
+        //{
+        //    if (string.IsNullOrWhiteSpace(courseId))
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Course ID is required");
+        //    }
+
+        //    var groupsForCourse = db.Groups.Where(g => g.CourseCode == courseId).ToList();
+        //    ViewBag.GroupId = new SelectList(groupsForCourse, "GroupId", "GroupId");
+
+        //    return View();
+        //}
+
+
+        
+        public ActionResult Enroll(string groupId)
         {
-            if (string.IsNullOrWhiteSpace(courseId))
+            Enrollment enrollment = new Enrollment
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Course ID is required");
-            }
-
-            var groupsForCourse = db.Groups.Where(g => g.CourseCode == courseId).ToList();
-            ViewBag.GroupId = new SelectList(groupsForCourse, "GroupId", "GroupId");
-
-            return View();
-        }
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Enroll(Enrollment enrollment)
-        {
+                GroupId = groupId
+            };
             if (ModelState.IsValid)
             {
                 if (Session["UserId"] != null)
                 {
                     int userId = (int)Session["UserId"];
                     enrollment.UserId = userId;
-
                     var existingEnrollment = db.Enrollments
-                        .FirstOrDefault(e => e.UserId == userId && e.GroupId == enrollment.GroupId);
+                        .FirstOrDefault(e => e.UserId == userId && e.GroupId == groupId);
 
                     if (existingEnrollment == null)
                     {
+                        
                         if (HasTimeConflict(enrollment.GroupId, userId))
                         {
                             // Time conflict detected, add an error message.
@@ -71,18 +75,19 @@ namespace SchedMasterFinalWeb.Controllers
                                 ModelState.AddModelError("", "The group could not be found for the provided GroupId.");
                             }
 
-                            return View(enrollment);
+                            return RedirectToAction("Index", "Groups");
                         }
-
+                        enrollment.Grade = 0;
                         db.Enrollments.Add(enrollment);
                         db.SaveChanges();
-                        TempData["SuccessMessage"] = "You have successfully enrolled in the course.";
-                        return RedirectToAction("Index"); 
+                        TempData["Message"] = "You have successfully enrolled in the course.";
+                        return RedirectToAction("Index", "Groups");
 
                     }
                     else
                     {
                         ModelState.AddModelError("", "You are already enrolled in this course group.");
+                        TempData["Message"] = "You are already enrolled in this course group.";
                     }
                 }
                 else
@@ -92,13 +97,49 @@ namespace SchedMasterFinalWeb.Controllers
 
                     // Reload the form or return to a different view as necessary
                     ViewBag.GroupId = new SelectList(db.Groups, "GroupId", "GroupId");
-                    return View("Enroll");
+                    return RedirectToAction("Index", "Groups");
                 }
             }
 
             // If we reach here, something went wrong, or the user is not logged in
             ViewBag.GroupId = new SelectList(db.Groups, "GroupId", "GroupId", enrollment.GroupId);
-            return View(enrollment);
+            return RedirectToAction("Index", "Groups");
+        }
+
+
+        public ActionResult Disenroll(string groupId)
+        {
+            Enrollment enrollment = new Enrollment
+            {
+                GroupId = groupId
+            };
+            if (ModelState.IsValid)
+            {
+                if (Session["UserId"] != null)
+                {
+                    int userId = (int)Session["UserId"];
+                    enrollment.UserId = userId;
+                    var existingEnrollment = db.Enrollments
+                        .FirstOrDefault(e => e.UserId == userId && e.GroupId == groupId);
+
+                    if (existingEnrollment != null)
+                    {
+                        // Remove the enrollment from the DbSet
+                        db.Enrollments.Remove(existingEnrollment);
+
+                        // Save changes to the database
+                        db.SaveChanges();
+
+                        // Optionally, you can use TempData to pass a message to the redirected action if you want to display a message to the user
+                        TempData["Message"] = "You have been successfully disenrolled.";
+                    }
+                    else
+                    {
+                        TempData["Message"] = "Enrollment not found or you're not enrolled in this group.";
+                    }
+                }
+            }
+            return RedirectToAction("Index", "Groups");
         }
         public ActionResult MyEnrollments()
         {
@@ -106,21 +147,36 @@ namespace SchedMasterFinalWeb.Controllers
             {
                 int userId = (int)Session["UserId"];
 
-               
+                // Get the enrollments for the student
                 var enrollments = db.Enrollments
                     .Where(e => e.UserId == userId)
                     .Include(e => e.Group)
                     .Include(e => e.Group.Course)
-                    
                     .ToList();
 
-                return View(enrollments);
+                // Get the group IDs for the student's enrollments
+                var groupIds = enrollments.Select(e => e.GroupId).Distinct().ToList();
+
+
+                // Get the class sessions for those groups
+                var classSessions = db.ClassSessions
+                    .Where(cs => groupIds.Contains(cs.GroupId))
+                    .Include(cs => cs.Group)
+                    .ToList();
+
+
+                // Combine the enrollments and class sessions into a view model if needed
+                // For simplicity, we're using a Tuple here, but you should create a proper view model
+                var viewModel = new Tuple<List<Enrollment>, List<ClassSession>>(enrollments, classSessions);
+                return View("MyEnrollments", "~/Views/Shared/_StudentLayout.cshtml", viewModel);
             }
             else
             {
                 return RedirectToAction("Index", "StudentDashboard");
             }
         }
+      
+
         public bool HasTimeConflict(string newGroupId, int userId)
         {
             // Fech all class sesions for the new group.
@@ -149,6 +205,8 @@ namespace SchedMasterFinalWeb.Controllers
                         if ((newSession.StartTime >= existingSession.StartTime && newSession.StartTime < existingSession.EndTime) ||
                             (newSession.EndTime > existingSession.StartTime && newSession.EndTime <= existingSession.EndTime))
                         {
+                            TempData["Message"] = "The Group: " + newSession.GroupId + ". would have conflict with Group: " + existingSession.GroupId;
+
                             // Time conflict found.
                             return true;
                         }
