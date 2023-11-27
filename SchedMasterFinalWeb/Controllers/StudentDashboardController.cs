@@ -24,23 +24,9 @@ namespace SchedMasterFinalWeb.Controllers
         {
             return RedirectToAction("Index", "Groups");
         }
-        //public ActionResult Enroll(string courseId)
-        //{
-        //    if (string.IsNullOrWhiteSpace(courseId))
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Course ID is required");
-        //    }
-
-        //    var groupsForCourse = db.Groups.Where(g => g.CourseCode == courseId).ToList();
-        //    ViewBag.GroupId = new SelectList(groupsForCourse, "GroupId", "GroupId");
-
-        //    return View();
-        //}
-
-
-        
+      
         public ActionResult Enroll(string groupId)
-        {
+        { 
             Enrollment enrollment = new Enrollment
             {
                 GroupId = groupId

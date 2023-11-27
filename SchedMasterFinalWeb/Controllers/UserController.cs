@@ -52,7 +52,7 @@ namespace SchedMasterFinalWeb.Controllers
                         {
                             return RedirectToAction("ChangePassword", "User", new { id = user.UserId });
                         }
-                        return RedirectToAction("Index", "Teacher");
+                        return RedirectToAction("Index", "TeacherDashboard");
                     }
                     else if (user.Role == "Student")
                     {

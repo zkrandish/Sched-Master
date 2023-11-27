@@ -20,5 +20,17 @@ namespace SchedMasterFinalWeb.Controllers
             }
             return View("Index", "~/Views/Shared/_StudentLayout.cshtml", db.Groups.ToList());
         }
+
+
+        public ActionResult TeacherIndex()
+        {
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Message = TempData["Message"].ToString();
+            }
+            // Get all groups where UserId is null
+            var groupsWithNoUser = db.Groups.Where(g => g.UserId == null).ToList();
+            return View("Index", "~/Views/Shared/_StudentLayout.cshtml", groupsWithNoUser);
+        }
     }
 }
