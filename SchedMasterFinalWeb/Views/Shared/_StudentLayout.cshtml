@@ -25,6 +25,13 @@
             <div class="menu">
                 @Html.ActionLink("View All Available Courses", "ViewAllAvailableCourses", "StudentDashboard")
                 @Html.ActionLink("My Schedule", "MyEnrollments", "StudentDashboard")
+
+                <!-- Spacing div for pushing logout link to the bottom -->
+                <div class="sidebar-spacer"></div>
+
+                <!-- Logout link at the bottom -->
+                @Html.ActionLink("Logout", "Logout", "User")
+
             </div>
         </div>
 

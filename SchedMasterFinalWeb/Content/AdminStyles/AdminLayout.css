@@ -19,6 +19,11 @@
     box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
     flex-shrink: 0;
+
+   
+}
+.sidebar-spacer {
+    flex-grow: 1; /* This will push everything after it to the bottom */
 }
 
     .sidebar:hover {

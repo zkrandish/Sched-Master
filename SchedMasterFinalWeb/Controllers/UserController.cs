@@ -72,6 +72,21 @@ namespace SchedMasterFinalWeb.Controllers
             return View(model);
         }
         // GET: User/ChangePassword
+
+
+        
+        public ActionResult Logout()
+        {
+            // This will clear the form authentication cookie
+            FormsAuthentication.SignOut();
+
+            // This will clear all items from the session
+            Session.Clear();
+
+
+            return RedirectToAction("Login");
+
+        }
         public ActionResult ChangePassword(int id)
         {
            
